@@ -5,9 +5,8 @@ const productSchema = mongoose.Schema;
 const productModel = new productSchema(
   {
     _id:  mongoose.Schema.Types.ObjectId,
-    name:  {type: String },
-    genre:  {type: String },
-    price:  {type: Number },
+    name:  {type: String, required:true },
+    price:  {type: Number, required:true },
   }
 );
 
