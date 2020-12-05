@@ -1,21 +1,19 @@
 const express = require('express');
 const chalk = require('chalk');
-// const mongoClient  = require('mongodb').MongoClient;
-// const debug = require('debug')('app:bookRoutes');
-// const passport = require('passport');
+const mongoose = require('mongoose');
+const Order = require('../models/order');
+const Product = require('../models/product');
+const ordersController = require('../controllers/orders')(Order, Product);
+
 
 const router = express.Router();
 
-router.post('/', (req, res, next) => {
-  const order = {
-    productId: req.body.productId,
-    quantity: req.body.quantity,
-  }
-    res.status(200).json({
-      message: 'Order was created',
-      order: order
-    });
-});
+
+router.post('/', ordersController.post);
+router.get('/', ordersController.get);
+router.get('/:orderId', ordersController.getOrderById);
+router.patch('/:orderId', ordersController.updateOrderByPatch);
+router.delete('/:orderId', ordersController.deleteOrder);
 
 
 module.exports = router;
