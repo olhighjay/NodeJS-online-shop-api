@@ -1,7 +1,7 @@
 function productsController(Product){
   function get(req, res, next){
     Product.find()
-    .select("name price _id")
+    .select("name price _id productImage")
     .exec()
     .then(docs => {
         const response = {
@@ -10,6 +10,7 @@ function productsController(Product){
             return {
               name: doc.name,
               price: doc.price,
+              productImage: doc.productImage,
               _id: doc._id,
               request: {
                 type: 'GET',
@@ -26,12 +27,13 @@ function productsController(Product){
     });    
   };
 
-  function post(req, res){
-  
+  function post(req, res, next){
+    console.log(req.file);
     const product = new Product({
       _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
-      price: req.body.price
+      price: req.body.price,
+      productImage: req.file.path
     });
     product.save()
     .then(result => {
@@ -60,7 +62,7 @@ function productsController(Product){
   function getProductById(req, res, next){
     const id = req.params.productId;
     Product.findById(id)
-    .select("name price _id")
+    .select("name price _id productImage")
     .exec()
     .then(doc => {
       if(doc){

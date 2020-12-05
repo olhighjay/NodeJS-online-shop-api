@@ -1,4 +1,3 @@
-const product = require("../models/product");
 
 function ordersController(Order, Product){
   function get(req, res, next){

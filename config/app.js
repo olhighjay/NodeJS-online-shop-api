@@ -11,6 +11,8 @@ const productRoutes = require('../api/routes/products');
 const orderRoutes = require('../api/routes/orders');
 
 app.use(morgan('dev'));
+//make the folder public
+app.use('/api/public/images', express.static('api/public/images'))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
