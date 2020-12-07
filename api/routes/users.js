@@ -1,6 +1,7 @@
 const express = require('express');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const usersController = require('../controllers/users')(User);
 

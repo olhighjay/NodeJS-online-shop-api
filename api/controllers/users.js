@@ -1,4 +1,7 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const chalk = require('chalk');
+// const { JsonWebTokenError } = require('jsonwebtoken');
 function usersController(User){
   function get(req, res, next){
     Order.find()
@@ -83,14 +86,24 @@ function usersController(User){
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-          if(err){
+        console.log(chalk.yellow(process.env.JWT_KEY));
+        if(err){
             return res.status(401).json({
               message: 'Auth Failed'
             });
           }
-          if(result)     {
+          if(result){
+            const token = jwt.sign({
+              email: user[0].email,
+              userId: user[0]._id
+              }, process.env.JWT_KEY,
+              {
+                expiresIn: "1h"
+              }
+            );
             return res.status(200).json({
-              message: 'Auth Successful'
+              message: 'Auth Successful',
+              token:token
             });
           };
           return res.status(401).json({
