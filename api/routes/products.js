@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const Product = require('../models/product');
+const authWare = require('../middlewares/auth');
 const productsController = require('../controllers/products')(Product);
 
 const storage = multer.diskStorage({
@@ -39,13 +40,13 @@ const router = express.Router();
 
 router.get('/', productsController.get);
 
-router.post('/', upload.single('productImage'), productsController.post);
+router.post('/', authWare, upload.single('productImage'), productsController.post);
 
 router.get('/:productId', productsController.getProductById);
 
-router.patch('/:productId', productsController.updateProductByPatch);
+router.patch('/:productId',  authWare, productsController.updateProductByPatch);
 
-router.delete('/:productId', productsController.deleteProduct);
+router.delete('/:productId', authWare, productsController.deleteProduct);
 
 
 

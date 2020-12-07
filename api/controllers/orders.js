@@ -32,6 +32,7 @@ function ordersController(Order, Product){
   };
 
   function post(req, res){
+    console.log(req.body.productId);
     Product.findById(req.body.productId)
      .then(product => {
         if(!product){
