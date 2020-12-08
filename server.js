@@ -7,7 +7,7 @@ const chalk = require('chalk');
 
 
 
-const jay = "jay8poihmhui88";
+const jay = "jay8pyvycvuicw7yjcoihmhui88";
 
 
 
