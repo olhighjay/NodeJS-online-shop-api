@@ -7,9 +7,6 @@ const chalk = require('chalk');
 
 
 
-const jay = "jay8pyvycvuicw7yjcoihmhui88";
-
-
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);

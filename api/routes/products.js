@@ -33,8 +33,7 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-// const debug = require('debug')('app:bookRoutes');
-// const passport = require('passport');
+
 
 const router = express.Router();
 
